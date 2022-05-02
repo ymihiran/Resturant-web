@@ -2,21 +2,26 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../styles/Login.module.css";
+//import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState(false);
   const router = useRouter();
+  //const history = useHistory();
 
   const handleClick = async () => {
+    console.log("Handleing..");
     try {
       await axios.post("http://localhost:3000/api/login", {
         username,
         password,
       });
-      router.push("/admin");
+      console.log("pushing..");
+      router.push("/admin/");
     } catch (err) {
+      console.log("Error catched..");
       setError(true);
     }
   };

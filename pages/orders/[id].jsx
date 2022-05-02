@@ -1,15 +1,15 @@
 import styles from "../../styles/Order.module.css";
 import Image from "next/image";
+import axios from "axios";
 
-
-const Order = () => {
+const Order = ({ order }) => {
+  const status = order.status;
 
   const statusClass = (index) => {
     if (index - status < 1) return styles.done;
     if (index - status === 1) return styles.inProgress;
     if (index - status > 1) return styles.undone;
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -23,16 +23,16 @@ const Order = () => {
             </tr>
             <tr className={styles.tr}>
               <td>
-                <span className={styles.id}>#1111</span>
+                <span className={styles.id}>{order._id}</span>
               </td>
               <td>
-                <span className={styles.name}>Mahela j</span>
+                <span className={styles.name}>{order.customer}</span>
               </td>
               <td>
-                <span className={styles.address}>110 G2, Kothalawala, Malabe</span>
+                <span className={styles.address}>{order.address}</span>
               </td>
               <td>
-                <span className={styles.total}>$99.99</span>
+                <span className={styles.total}>${order.total}</span>
               </td>
             </tr>
           </table>
@@ -96,13 +96,13 @@ const Order = () => {
         <div className={styles.wrapper}>
           <h2 className={styles.title}>CART TOTAL</h2>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Subtotal:</b>$99.99
+            <b className={styles.totalTextTitle}>Subtotal:</b>${order.total}
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Discount:</b>$0.00
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Total:</b>$99.99
+            <b className={styles.totalTextTitle}>Total:</b>${order.total}
           </div>
           <button disabled className={styles.button}>
             PAID
@@ -113,5 +113,11 @@ const Order = () => {
   );
 };
 
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
+  return {
+    props: { order: res.data },
+  };
+};
 
 export default Order;

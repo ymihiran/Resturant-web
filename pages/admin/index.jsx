@@ -2,6 +2,9 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/Admin.module.css";
+import AddButton from "../../components/AddButton";
+import Add from "../../components/Add";
+
 
 const Index = ({ orders, products }) => {
   const [pizzaList, setPizzaList] = useState(products);
@@ -37,8 +40,16 @@ const Index = ({ orders, products }) => {
     }
   };
 
+  const [close, setClose] = useState(true);
   return (
+
+    
+
     <div className={styles.container}>
+
+      {<AddButton setClose={setClose} />}
+      {!close && <Add setClose={setClose} />}
+
       <div className={styles.item}>
         <h1 className={styles.title}>Products</h1>
         <table className={styles.table}>
@@ -118,7 +129,7 @@ const Index = ({ orders, products }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const myCookie = ctx.req?.cookies || "";
+ /* const myCookie = ctx.req?.cookies || "";
 
   if (myCookie.token !== process.env.TOKEN) {
     return {
@@ -128,7 +139,7 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   }
-
+*/
   const productRes = await axios.get("http://localhost:3000/api/products");
   const orderRes = await axios.get("http://localhost:3000/api/orders");
 

@@ -23,7 +23,7 @@ const Navbar = () => {
           </Link>
           <li className={styles.listItem}>Products</li>
           <li className={styles.listItem}>Menu</li>
-          <Image src="/img/logo.png" alt="" width="160px" height="69px" />
+          <Image src="/img/logo.png" alt="" width="80px" height="80px" />
           <li className={styles.listItem}>Events</li>
           <li className={styles.listItem}>Blog</li>
           <li className={styles.listItem}>Contact</li>
