@@ -5,8 +5,7 @@ import { useState } from "react";
 import Featured from "../components/Featured";
 import PizzaList from "../components/PizzaList";
 import styles from "../styles/Home.module.css";
-import AddButton from "../components/AddButton";
-import Add from "../components/Add";
+
 
 export default function Home({ pizzaList, admin }) {
   const [close, setClose] = useState(true);
@@ -18,9 +17,9 @@ export default function Home({ pizzaList, admin }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured />
-      {<AddButton setClose={setClose} />}
+
       <PizzaList pizzaList={pizzaList} />
-      {!close && <Add setClose={setClose} />}
+
     </div>
   );
 }
