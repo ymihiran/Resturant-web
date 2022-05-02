@@ -5,8 +5,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
 
-const Product = ({ pizza }) => {
-  const [price, setPrice] = useState(pizza.prices[0]);
+const Product = ({ burger }) => {
+  const [price, setPrice] = useState(burger.prices[0]);
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [extras, setExtras] = useState([]);
@@ -17,7 +17,7 @@ const Product = ({ pizza }) => {
   };
 
   const handleSize = (sizeIndex) => {
-    const difference = pizza.prices[sizeIndex] - pizza.prices[size];
+    const difference = burger.prices[sizeIndex] - burger.prices[size];
     setSize(sizeIndex);
     changePrice(difference);
   };
@@ -35,20 +35,20 @@ const Product = ({ pizza }) => {
   };
 
   const handleClick = () => {
-    dispatch(addProduct({...pizza, extras, price, quantity}));
+    dispatch(addProduct({...burger, extras, price, quantity}));
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.imgContainer}>
-          <Image src={pizza.img} objectFit="contain" layout="fill" alt="" />
+          <Image src={burger.img} objectFit="contain" layout="fill" alt="" />
         </div>
       </div>
       <div className={styles.right}>
-        <h1 className={styles.title}>{pizza.title}</h1>
+        <h1 className={styles.title}>{burger.title}</h1>
         <span className={styles.price}>${price}</span>
-        <p className={styles.desc}>{pizza.desc}</p>
+        <p className={styles.desc}>{burger.desc}</p>
         <h3 className={styles.choose}>Choose the size</h3>
         <div className={styles.sizes}>
           <div className={styles.size} onClick={() => handleSize(0)}>
@@ -66,7 +66,7 @@ const Product = ({ pizza }) => {
         </div>
         <h3 className={styles.choose}>Choose additional ingredients</h3>
         <div className={styles.ingredients}>
-          {pizza.extraOptions.map((option) => (
+          {burger.extraOptions.map((option) => (
             <div className={styles.option} key={option._id}>
               <input
                 type="checkbox"
@@ -101,7 +101,7 @@ export const getServerSideProps = async ({ params }) => {
   );
   return {
     props: {
-      pizza: res.data,
+      burger: res.data,
     },
   };
 };

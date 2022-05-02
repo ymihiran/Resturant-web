@@ -7,7 +7,7 @@ import Add from "../../components/Add";
 
 
 const Index = ({ orders, products }) => {
-  const [pizzaList, setPizzaList] = useState(products);
+  const [burgerList, setburgerList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
   const status = ["preparing", "on the way", "delivered"];
 
@@ -17,7 +17,7 @@ const Index = ({ orders, products }) => {
       const res = await axios.delete(
         "http://localhost:3000/api/products/" + id
       );
-      setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
+      setburgerList(burgerList.filter((burger) => burger._id !== id));
     } catch (err) {
       console.log(err);
     }
@@ -62,7 +62,7 @@ const Index = ({ orders, products }) => {
               <th>Action</th>
             </tr>
           </tbody>
-          {pizzaList.map((product) => (
+          {burgerList.map((product) => (
             <tbody key={product._id}>
               <tr className={styles.trTitle}>
                 <td>
